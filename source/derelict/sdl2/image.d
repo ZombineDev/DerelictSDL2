@@ -47,11 +47,21 @@ private {
 alias IMG_SetError = SDL_SetError;
 alias IMG_GetError = SDL_GetError;
 
-enum : Uint8 {
+private enum _SDLImageVersionEnumMembers = " {
     SDL_IMAGE_MAJOR_VERSION     = 2,
     SDL_IMAGE_MINOR_VERSION     = 0,
     SDL_IMAGE_PATCHLEVEL        = 0,
 }
+";
+
+private enum _SDLImageVersionEnumAnon = "
+enum : Uint8" ~ _SDLImageVersionEnumMembers;
+
+private enum _SDLImageVersionEnumTyped = "
+enum SDLImageVersion : Uint8" ~ _SDLImageVersionEnumMembers;
+
+mixin(_SDLImageVersionEnumAnon);
+mixin(_SDLImageVersionEnumTyped);
 
 void SDL_IMAGE_VERSION( SDL_version* X ) {
     X.major     = SDL_IMAGE_MAJOR_VERSION;
