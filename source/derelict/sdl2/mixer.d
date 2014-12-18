@@ -43,11 +43,22 @@ private {
         static assert( 0, "Need to implement SDL2_mixer libNames for this operating system." );
 }
 
-enum : Uint8 {
+private enum _SDLMixerVersionEnumMembers = " {
     SDL_MIXER_MAJOR_VERSION     = 2,
     SDL_MIXER_MINOR_VERSION     = 0,
     SDL_MIXER_PATCHLEVEL        = 0,
 }
+";
+
+private enum _SDLMixerVersionEnumAnon = "
+enum : Uint8" ~ _SDLMixerVersionEnumMembers;
+
+private enum _SDLMixerVersionEnumTyped = "
+enum SDLMixerVersion : Uint8" ~ _SDLMixerVersionEnumMembers;
+
+mixin(_SDLMixerVersionEnumAnon);
+mixin(_SDLMixerVersionEnumTyped);
+
 alias MIX_MAJOR_VERSION = SDL_MIXER_MAJOR_VERSION;
 alias MIX_MINOR_VERSION = SDL_MIXER_MINOR_VERSION;
 alias MIX_PATCH_LEVEL = SDL_MIXER_PATCHLEVEL;
